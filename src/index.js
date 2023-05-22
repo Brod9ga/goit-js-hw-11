@@ -127,7 +127,9 @@ function addBtnAddMore() {
 function clearPages(){
   pages=1
   }
-
+  function clearTotalSearch(){
+    totalSearch = 0
+  }
 function loadMoreImages() {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     addCard();
