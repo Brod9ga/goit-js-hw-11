@@ -106,6 +106,7 @@ async function addCard(e) {
     gallery.insertAdjacentHTML('beforeend', resps);
     const lightbox = new SimpleLightbox('.gallery a');
   lightbox.refresh();
+  
     pages++;
     totalSearch += 40;
     
@@ -123,3 +124,11 @@ function addBtnAddMore() {
   const btnAddMore = document.querySelector('.btnAddMore');
   btnAddMore.addEventListener('click', async () => addCard(event)); // Обработчик события для кнопки "Add More"
 }
+
+function loadMoreImages() {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    addCard();
+  }
+}
+
+window.addEventListener('scroll', loadMoreImages);
