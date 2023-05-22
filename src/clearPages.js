@@ -1,5 +1,3 @@
-export 
-let pages = 1;
-function clearPages(){
+export function clearPages(){
     pages=1
     }

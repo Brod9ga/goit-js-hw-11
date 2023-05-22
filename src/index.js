@@ -124,6 +124,9 @@ function addBtnAddMore() {
   const btnAddMore = document.querySelector('.btnAddMore');
   btnAddMore.addEventListener('click', async () => addCard(event)); // Обработчик события для кнопки "Add More"
 }
+function clearPages(){
+  pages=1
+  }
 
 function loadMoreImages() {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
