@@ -42,3 +42,17 @@ img{
     height: 200px;
     object-fit: cover ;
 }
+.js_btn_add_More{
+    text-align: center;
+
+}
+.btnAddMore{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid seagreen;
+    margin-bottom: 20px;
+}
+.btnAddMore:hover{
+    background-color: rgb(31, 228, 228);
+}

@@ -2,6 +2,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { clearTotalSearch}from './clearTotalSearch';
+import {clearPages} from './clearPages'
+import { clearGallary } from './clearGallary';
+import { clearBtnAddMore } from './clearBtnAddMore';
+
 
 const form = document.querySelector('.search-form');
 const input = document.querySelector('[name="searchQuery"]');
@@ -12,8 +17,8 @@ const divBtnAddMore = document.querySelector('.js_btn_add_More')
 let pages = 1;
 let wordToSeach = '';
 let totalSearch = 0;
-let totalHits = 0
-btnAddMore.style.display = 'none'
+let totalHits = 1
+// btnAddMore.style.display = 'none'
 
 form.style.backgroundColor = 'blue';
 form.style.padding = '20px';
@@ -33,6 +38,8 @@ btnAddMore.style.fontSize = '16px';
 btnAddMore.style.backgroundColor = 'blue';
 btnAddMore.style.border = 'none';
 btnAddMore.style.color = 'white';
+btnAddMore.style.width = "50px"
+btnAddMore.style.heigth = "100px"
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -43,7 +50,9 @@ form.addEventListener('submit', e => {
     Notify.failure('Please, input value');
     return;
   }
- 
+ clearPages()
+ clearGallary()
+ clearTotalSearch()
   clearBtnAddMore();
   addCard(e);
   addBtnAddMore();
@@ -75,9 +84,9 @@ async function addCard(e) {
   try {
     const response = await getFoto(input.value.trim);
     totalHits = await response.data.totalHits
-    if (totalSearch >= totalHits) {
+     if (totalSearch >= totalHits) {
       Notify.info("We're sorry, but you've reached the end of search results.");
-      divBtnAddMore.innerHTML = ''
+      clearBtnAddMore()
 
       return;
     }
@@ -113,10 +122,4 @@ function addBtnAddMore() {
   divBtnAddMore.innerHTML = '<button class="btnAddMore">Add More</button>';
   const btnAddMore = document.querySelector('.btnAddMore');
   btnAddMore.addEventListener('click', async () => addCard(event)); // Обработчик события для кнопки "Add More"
-}
-function clearBtnAddMore(){
-  divBtnAddMore.innerHTML = ''
-}
-function clearGallary(){
-  gallery.innerHTML = ''
 }
