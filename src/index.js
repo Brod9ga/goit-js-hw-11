@@ -1,3 +1,4 @@
+let pages = 1;
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 import SimpleLightbox from "simplelightbox";
@@ -14,7 +15,7 @@ const gallery = document.querySelector('.gallery');
 const btnAddMore = document.querySelector('.btnAddMore')
 const divBtnAddMore = document.querySelector('.js_btn_add_More')
 
-let pages = 1;
+
 let wordToSeach = '';
 let totalSearch = 0;
 let totalHits = 1
