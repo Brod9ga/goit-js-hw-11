@@ -76,27 +76,23 @@ async function getFoto() {
   return searchFoto;
 }
 async function addCard(e) {
-
- 
- 
-  
-
   try {
     const response = await getFoto(input.value.trim);
     totalHits = await response.data.totalHits
-     if (totalSearch >= totalHits) {
+   
+    if (totalSearch >= totalHits) {
       Notify.info("We're sorry, but you've reached the end of search results.");
       clearBtnAddMore()
 
       return;
-    }
-
-    if ((await response.data.totalHits) === 0) {
+    } if (totalHits === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
-    }
+    } 
+
+    
     const resps = response.data.hits
       .map(data => {
         // Обращаемся к полю data.hits для получения массива фотографий
