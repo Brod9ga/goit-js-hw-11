@@ -14,6 +14,8 @@ const gallery = document.querySelector('.gallery');
 const btnAddMore = document.querySelector('.btnAddMore')
 const divBtnAddMore = document.querySelector('.js_btn_add_More')
 
+const lightbox = new SimpleLightbox('.gallery a');
+
 let pages = 1;
 let wordToSeach = '';
 let totalSearch = 0;
@@ -57,7 +59,7 @@ form.addEventListener('submit', e => {
   addCard(e);
   addBtnAddMore();
   if(totalHits<=totalSearch){clearBtnAddMore(),Notify.info("We're sorry, but you've reached the end of search results.");}
- 
+
 });
 
 
@@ -99,13 +101,13 @@ async function addCard(e) {
         return `<div class="photo-card"><a href="${data.largeImageURL}"><img src="${data.webformatURL}" alt="${data.tags}" loading="lazy" /></a><div class="info">  <p class="info-item">    <b>Likes:</b> ${data.likes}</p>  <p class="info-item">        <b>Views:</b> ${data.views}</p> <p class="info-item">    <b>Comments:</b> ${data.comments}</p>  <p class="info-item">    <b>Downloads:</b> ${data.downloads}</p></div ></div>`;
       })
       .join('');
+    
+
     gallery.insertAdjacentHTML('beforeend', resps);
-    const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
-  
+    
     pages++;
     totalSearch += 40;
-    
+    lightbox.refresh();
   } catch (error) {
     console.error(error);
     Notify.failure(
@@ -127,8 +129,11 @@ function clearPages(){
     totalSearch = 0
   }
 function loadMoreImages() {
+  if(totalHits<=totalSearch){return}
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     addCard();
+    console.log(totalHits)
+    console.log(totalSearch)
   }
 }
 
